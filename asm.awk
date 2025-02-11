@@ -78,6 +78,7 @@ BEGIN {
           i ++
           line = line " " $i
         } while ($i !~ /"$/)    # "
+        line = line ";"
       }
       else if ($i == ".lcomm") {
         tmp = $(i + 1)
