@@ -38,15 +38,9 @@ BEGIN {
         i = i + 2
       }
       else if ($i == ".long" || $i == ".word" || $i == ".byte") {
-        if ($i == ".long") {
-          dtype = "uint32_t"
-        }
-        else if ($i == ".word") {
-          dtype = "uint16_t"
-        }
-        else if ($i == ".byte") {
-          dtype = "uint8_t"
-        }
+        dtype = $i
+        sub(/^\./, "", dtype);
+
         line = line " " dtype " " last_label " = "
         last_label = ""
 
@@ -83,7 +77,7 @@ BEGIN {
       else if ($i == ".lcomm") {
         tmp = $(i + 1)
         sub(/,$/, "", tmp)
-        line = line " uint8_t " tmp "[" $(i + 2) "];"
+        line = line " byte " tmp "[" $(i + 2) "];"
         i = i + 2
       }
       else {
