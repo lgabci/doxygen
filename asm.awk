@@ -65,8 +65,8 @@ BEGIN {
           line = line " " values[0] ";"
         }
       }
-      else if ($i == ".string") {
-        line = line " char *" last_label " ="
+      else if ($i == ".string" || $i == ".asciz") {
+        line = line " byte *" last_label " ="
         last_label = ""
         do {
           i ++
